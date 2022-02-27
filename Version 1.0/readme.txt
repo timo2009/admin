@@ -1,6 +1,4 @@
-Admin is created by Timo StreichValides Passwort!
-
-mail@timostreich.de
+Admin is created by Timo Streich!
 ________________________________________________________________________
 
 Version 1.0
