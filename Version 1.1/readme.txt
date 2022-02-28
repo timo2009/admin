@@ -1,7 +1,7 @@
 Admin is created by Timo Streich!
 ________________________________________________________________________
 
-Version 1.0
+Version 1.1
 
 Infos:
 - in the file .htusers.txt you have to write the user:
@@ -20,3 +20,5 @@ More informations are in the help file.
 
 User language:
 German
+
+!!! This Version is NOT finish !!!
