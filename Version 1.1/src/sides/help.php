@@ -1,6 +1,5 @@
 <?php include "../layout/header.php"; ?>
 
-
 	<section id="ueberblick">
 		<h1>Folgendes stellen wir hier vor:</h1>
 		<ol>
@@ -76,9 +75,9 @@
               <h1>#2 Stysthem Informationen</h1>
               <p>
                 <ul>
-                	<li>Version 1.1</li>                	
-                	<li>Benötigter Speicherplatz: </li>
+                	<li>Version 1.1</li>  
                 	<li>Programmiert von Timo Streich</li>
+                  <li>Alle Rechte Vorbehalten</li>              	
                 </ul>
               </p>
             </header>
@@ -86,4 +85,5 @@
         </div>
       </div>
     </section>
+
 <?php include "../layout/footer.php"; ?>

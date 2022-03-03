@@ -13,6 +13,7 @@ Functions for you:
 - load files up
 - view this files
 - delete this files
+- edit Textfiles
 
 PHP Files can´t load up.
 

@@ -12,13 +12,25 @@ if ($_GET['type']=="") {
 	";
 }
 ?>
+
 <div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="?type=text" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("text", $_GET['type']); ?>" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Text</span> </a>
-  <a href="?type=audio" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("audio", $_GET['type']); ?>" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Audios</span> </a>
-  <a href="?type=image" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("image", $_GET['type']); ?>" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Bilder</span> </a>
-  <a href="?type=video" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("video", $_GET['type']); ?>" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Videos</span> </a>  
-  <a href="?type=all" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("all", $_GET['type']); ?>" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Alle Dateien</span> </a>
+  <a 
+  	href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="?type=text" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("text", $_GET['type']); ?>" aria-current="page">
+  	<span class="ms-2">Text</span>
+  </a>
+  <a href="?type=audio" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("audio", $_GET['type']); ?>" aria-current="page">
+  	<span class="ms-2">Audios</span>
+  </a>
+  <a href="?type=image" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("image", $_GET['type']); ?>" aria-current="page">
+  	<span class="ms-2">Bilder</span>
+  </a>
+  <a href="?type=video" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("video", $_GET['type']); ?>" aria-current="page">
+  	<span class="ms-2">Videos</span>
+  </a>  
+  <a href="?type=all" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("all", $_GET['type']); ?>" aria-current="page">
+  	<span class="ms-2">Alle Dateien</span>
+  </a>
 </div>
        
 

@@ -1,4 +1,5 @@
 <?php 
+
 include "../../class/.htUserClass.php";
 include "../../class/.htAdminClass.php";
 
@@ -12,16 +13,11 @@ else {
 }
 
 ?>
-<style type="text/css">
-	a, a:visited, a:link{
-		text-decoration: none;
-		color: blue;
-	}
-	a:hover {
-		color: #000;
-	}
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../systhem/styles.css">
 <script defer>document.addEventListener("touchstart", function(){}, true);</script>
 <?php 
 $admin=new AdminClass();
@@ -36,7 +32,13 @@ if (isset($pfad)) {
 	}
 	$timestamp = filemtime($html[3]);
 	$filesize=filesize($html[3]);
-	echo "<div class='alert alert-info' role='alert'><h1>Webseiten Informationen:</h1><ol><li><a href='".$html[2]."'>Zurück</a> | <a href='download.php?pfad=".$html[3]."'>Herunterladen</a></li>\n";
+	echo "<div class='alert alert-info' role='alert'><h1>Webseiten Informationen:</h1><ol><li><a href='".$html[2]."'>Zurück</a> | <a href='download.php?pfad=".$html[3]."'>Herunterladen</a>";
+	if ($html[4]) {
+		echo " | <a href='edit.php?pfad=".$html[3]."&&back=".$html[2]."'>Bearbeiten</a></li>\n";
+	}
+	else {
+		echo "</li>";
+	}
 	echo "<li>Pfad: ".substr($html[3], 8)."</li>";	
 	echo "<li>Datei: ".$html[1]."</li>";
 	echo "<li>Size: ".$admin->formatSizeUnits($filesize)."</li>";	
@@ -44,4 +46,5 @@ if (isset($pfad)) {
 	echo "</ol></div><hr>";
 	echo $html[0];
 }
+
 ?>

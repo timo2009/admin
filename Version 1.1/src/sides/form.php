@@ -1,10 +1,10 @@
 <?php include "../layout/header.php"; ?>
+
 	<!-- HOCHLADE-FORMULAR-BEREICH -->
 	<section id="upload">
 		<div class="container">
 			<div class="row mt-3">
-				<div class="col-1"></div>
-				<div class="col-10">
+				<div class="col-12 center">
 
 					<!-- FORMULAR -->
 			        <form 
@@ -39,12 +39,12 @@
 			        </form>
 
 				</div>
-				<div class="col-1"></div>
 			</div>
 			<div class="row">
-				<div class="col-2"></div>
-				<div class="col-8">		
+				<div class="col-12 center">	
+
 <?php 
+
 $admin=new AdminClass();
 $data=$_POST['submit'];
 
@@ -71,17 +71,19 @@ if (isset($data)) {
 
 
 <?php
-else: ?>
+elseif($upload): ?>
 <div class="alert alert-danger" role="alert">
-	<b>Return Code: <?php echo $upload; ?></b>
+	<b>Type Error:</b> Der Typ: <?php echo $upload; ?> ist nicht erlaubt
 </div>
 <?php
 endif;
 }
+
 ?>
+
 				</div>
-				<div class="col-2"></div>
 			</div>
 		</div>
 	</section>
+
 <?php include "../layout/footer.php"; ?>

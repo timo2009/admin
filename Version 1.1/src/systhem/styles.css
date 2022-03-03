@@ -8,6 +8,13 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 16px;
 }
+a, a:visited, a:link{
+  text-decoration: none;
+  color: blue;
+}
+a:hover {
+  color: #000;
+}
 .center{
   text-align: center;
 }
@@ -24,17 +31,16 @@ body {
   padding-top: 60px;
 }
 
-.sidebar a {
+.sidebar a{
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #FFF;
   display: block;
   transition: 0.3s;
 }
-
 .sidebar a:hover {
-  color: #f1f1f1;
+  color: #F0F0F0;
 }
 
 .sidebar .closebtn {
@@ -43,6 +49,16 @@ body {
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  -o-transition: transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+.sidebar .closebtn:hover {
+  -webkit-transform: rotateZ(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotateZ(90deg);
 }
 
 .openbtn {
@@ -59,6 +75,11 @@ body {
   background-color: #F0F0F0;
 }
 
+.active, .active:hover {
+  padding: 5px;
+  background-color: #FFF;
+  color: #000 !important;
+}
 #main {
   transition: margin-left .5s;
   padding: 16px;
@@ -68,29 +89,12 @@ body {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
-.active, .active:hover {
-  padding: 5px;
-  background-color: #FFF;
-  color: #000 !important;
-}
 body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   -moz-user-focus: ignore;
-}
-video, audio {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  max-width: 100%;
-  max-height: 100%;
-  user-select: none;
-  -moz-user-focus: normal;
 }
 
 .intro-container {
@@ -286,4 +290,12 @@ video, audio {
 #ueberblick {
   text-align: center;
   margin-top: 1rem;
+}
+
+embed {
+  width: 100%;
+  height: 100%;
+}
+audio {
+  width: 100%;
 }

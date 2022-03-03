@@ -12,6 +12,10 @@ class AdminClass
 		{
 	    	$fileName = $_FILES['file']['name'];
 	    	$tmpName = $_FILES['file']['tmp_name'];
+	    	if ($fileName=="" || $tmpName=="") {
+	    		return false;
+	    		die();
+	    	}
 	    	$type=$_FILES["file"]["type"];
 	    	$size=$_FILES["file"]["size"];
 	    	$extension = substr($fileName, strrpos($fileName, '.') + 1);
@@ -29,19 +33,18 @@ class AdminClass
 
 	    	elseif ($type_info[0]=="text") {
 	    		$pfad="../../../html/".$fileName;
-	    	}
-	    	else {
-	    		return "Unknow Type";
-	    		die();
-	    	}
-	    	
+	    	}		    	
+	    	elseif ($type_info[1]=="pdf") {
+	    		$pfad="../../../html/".$fileName;
+	    	}	    	
+    		else {
+    			return $type;
+    			die();
+    		}
 	    	$userpfad=substr($pfad, 8);
 
     		if (move_uploaded_file($tmpName, $pfad)){
     			return [$fileName, $tmpName, $type, $size, $userpfad, $type_info];
-    		}
-    		else {
-    			return $_FILES["file"]["error"];
     		}
 		}
 	}
@@ -130,6 +133,7 @@ class AdminClass
 		$type=mime_content_type($pfad);
 		$type_info = explode("/", $type);
 		$path_parts = pathinfo($pfad);
+		$text=false;
 
 		if ($type_info[0]=="audio") {
 	    	$html="<html>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</html>";
@@ -142,19 +146,24 @@ class AdminClass
 	    elseif ($type_info[0]=="video") {
 	    	$html="<html>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</html>";
 	    	$back="list.php?type=video";
+	    }	    
+	    elseif ($type_info[1]=="pdf") {
+	    	$html="<html>\n<head>\n<title>PDF</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<embed data=”NAME.pdf” type”application/pdf” src='".$pfad."'></embed>\n</body>\n</html>";
+	    	$back="list.php?type=text";
 	    }
 	    elseif ($type_info[0]=="text") {
 	    	$html=file_get_contents($pfad);
 	    	$back="list.php?type=text";
+	    	$text=true;
 	    }
 	    else {
 	    	$html="<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n<b>Error: </b>File not found.\n</body>\n</html>";    
 	    }
 	    if ($all) {
-	    	return [$html, $path_parts['basename'], "list.php?type=all", $pfad];
+	    	return [$html, $path_parts['basename'], "list.php?type=all", $pfad, $text];
 	    }
 	    else {
-	    	return [$html, $path_parts['basename'], $back, $pfad];
+	    	return [$html, $path_parts['basename'], $back, $pfad, $text];
 	    }
 	}
 
@@ -186,6 +195,26 @@ class AdminClass
         }
 
         return $bytes;
+	}
+	public function readTextFile($pfad)
+	{
+		return file_get_contents($pfad);
+	}
+	public function editTextFile($pfad, $content)
+	{
+		if (file_exists($pfad)) {
+			unlink($pfad);
+			if(file_put_contents($pfad, $content))
+			{
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
 	}
 }
 

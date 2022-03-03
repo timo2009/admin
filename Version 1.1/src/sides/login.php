@@ -26,7 +26,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-3"></div>
-		<div class="col-6 mt-3">
+		<div class="col-6 mt-3 center">
 			<h1>
 				Bitte logge dich ein:
 			</h1>
@@ -34,8 +34,8 @@
 		<div class="col-3"></div>
 	</div>
 	<div class="row">
-		<div class="col-3"></div>
-		<div class="col-6">
+		<div class="col-2"></div>
+		<div class="col-8 center">
 			<form action="login.php" method="post">
 				<div class="form-group">
 					<label for="exampleInputEmail1">
@@ -71,11 +71,11 @@
 				</button>
 			</form>
 		</div>
-		<div class="col-3"></div>
+		<div class="col-2"></div>
 	</div>
 	<div class="row">
 		<div class="col-3"></div>
-		<div class="col-6">
+		<div class="col-6 center">
 			
 
 <?php
