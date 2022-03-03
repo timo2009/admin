@@ -60,6 +60,22 @@
 	            </h2>
               </p>
           </article>
+          </div>          
+          <div class="col-3">
+            <article class="leistungs-teaser-box">
+              <h2>Das Editieren einer Textdatei</h2>
+              <p>
+                Um eine Textdatei zu editieren, in der Tabelle auf den Pfad drücken und auf der Show Seite auf Bearbeiten klicken, bearbeiten und auf change gehen.
+              </p>
+          </article>
+          </div>          
+          <div class="col-3">
+            <article class="leistungs-teaser-box">
+              <h2>Neue Textdatei erstellen</h2>
+              <p>
+                Um eine Textdatei zu erstellen, in der Tabelle auf das Plus drücken und auf der Add Seite den Namen (ohne Dateiendung) eingeben wähle außerdem deinen Dateityp aus.
+              </p>
+          </article>
           </div>
         </div>
       </div>

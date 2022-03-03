@@ -151,7 +151,7 @@ class AdminClass
 	    	$html="<html>\n<head>\n<title>PDF</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<embed data=”NAME.pdf” type”application/pdf” src='".$pfad."'></embed>\n</body>\n</html>";
 	    	$back="list.php?type=text";
 	    }
-	    elseif ($type_info[0]=="text") {
+	    elseif ($type_info[0]=="text" || $type_info[1]=="x-empty") {
 	    	$html=file_get_contents($pfad);
 	    	$back="list.php?type=text";
 	    	$text=true;
@@ -214,6 +214,36 @@ class AdminClass
 		}
 		else {
 			return false;
+		}
+	}
+
+	public function addFile($name, $art)
+	{
+		$pfad="../../../html/".$name;
+		$htmlG="<!DOCTYPE html>\n<html>\n<head>\n<meta charset='utf-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1'>\n<title>HTML Datei</title>\n</head>\n<body>\n\n</body>\n</html>";
+		if ($art=="html-g") {
+			$pfad=$pfad.".html";
+			if (file_exists($pfad)) {
+				return false;
+			}
+			file_put_contents($pfad, $htmlG);
+			return true;
+		}
+		elseif ($art=="html") {
+			$pfad=$pfad.".html";
+			if (file_exists($pfad)) {
+				return false;
+			}
+			file_put_contents($pfad, "");
+			return true;
+		}
+		elseif ($art=="txt") {
+			$pfad=$pfad.".txt";
+			if (file_exists($pfad)) {
+				return false;
+			}
+			file_put_contents($pfad, "");
+			return true;
 		}
 	}
 }

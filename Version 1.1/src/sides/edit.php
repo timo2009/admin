@@ -69,3 +69,4 @@ if (isset($content) && isset($pfad)) {
 endif;
 }
 ?>
+<?php include "../layout/footer.php"; ?>

@@ -36,12 +36,13 @@ if ($_GET['type']=="") {
 
 	<!-- VUE -->
 <button class="openbtn" onclick="openNav()">Datei Art ändern</button>
+
 	<div id="app" class="container">
 	    <table class="table table-bordered" empty-text="asd" empty-filtered-text="asd2">
 	        <thead>
 	            <tr>
 	                <th @click="sortBy='username'; sortAsc = !sortAsc">Name</th>
-	                <th @click="sortBy='password'; sortAsc = !sortAsc">Pfad/Link</th>
+	                <th @click="sortBy='password'; sortAsc = !sortAsc">Pfad/Link <a href="add.php" target="_blank" style="color: green; font-size: 16px; float: right;">+</a></th>
 	            </tr>
 	            <tr>
 		            <th><input class="form-control" v-model="search.name"> </th>

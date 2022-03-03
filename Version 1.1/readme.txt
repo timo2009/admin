@@ -14,6 +14,7 @@ Functions for you:
 - view this files
 - delete this files
 - edit Textfiles
+- add new Textfile
 
 PHP Files can´t load up.
 
@@ -22,4 +23,4 @@ More informations are in the help file.
 User language:
 German
 
-!!! This Version is NOT finish !!!
+!!! This Version is finish !!!

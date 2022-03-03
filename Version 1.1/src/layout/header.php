@@ -52,6 +52,9 @@ else {
 				</li>				
 				<li class="nav-item">
 	    			<a class="navbar-brand" href="help.php">Hilfe</a>
+				</li>				
+				<li class="nav-item">
+	    			<a class="navbar-brand" href="/">Admin Verlassen</a>
 				</li>
 			</ul>			
 			<ul class="navbar-nav ms-auto mt-2">
