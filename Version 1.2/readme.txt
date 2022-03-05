@@ -1,7 +1,7 @@
 Admin is created by Timo Streich!
 ________________________________________________________________________
 
-Version 1.1
+Version 1.2
 
 Infos:
 
