@@ -11,7 +11,7 @@ Functions for you:
 - delete this files
 - edit Textfiles
 - add new Textfile
-- After the first login with inizial Datas you add your own account.
+- After the first login with inizial Datas you add your own account.With the datas, which yu can read in the first readme.md file
 IMPORTANT: If you forget you login Datas you can show it in src/.htuser.txt
 So it works:
 First there are your user name than a ; after that the passwort!
