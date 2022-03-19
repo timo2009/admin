@@ -11,7 +11,7 @@
 				<form method="POST" action="add.php" class="form-outline">
 					<div class="form-group">
 						<label for="name">Name (ohne Dateiendung)*</label>
-						<input type="text" class="form-control" id="name" placeholder="Name(ohne Endung)" pattern="^(?!(\.)$).*" title="Bitte gebe den Namen an (ohne Dateiendung)" name="name">
+						<input type="text" class="form-control" id="name" placeholder="Name(ohne Endung)" title="Bitte gebe den Namen an (ohne Dateiendung)" name="name">
 					</div>
 					<div class="mt-2">Dateiart:</div>
 					<div class="form-check mt-1">
@@ -41,6 +41,11 @@
 <?php 
 
 $name=$_POST['name'];
+if (preg_match("/\./", $name))
+{
+print("<br>Keine Dateiendung angeben!");
+die();
+}
 $art=$_POST['art'];
 if (!empty($name) && isset($art)) {
 	$addFile=$admin->addFile($name, $art);
