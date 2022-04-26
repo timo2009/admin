@@ -17,7 +17,7 @@
               <h1>#1 Stysthem Informationen</h1>
               <p>
                 <ul>
-                  <li>Version 1.3</li>  
+                  <li>Version 1.4</li>
                   <li>Programmiert von Timo Streich</li>
                   <li>Alle Rechte Vorbehalten</li>                
                 </ul>
