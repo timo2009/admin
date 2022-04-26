@@ -1,0 +1,139 @@
+/* === GENERELLES ===  */
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+label {
+  display: inline-block;
+}
+
+.intro-container {
+  width: 80%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+.intro-container > h1 {
+  font-size: 2rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.intro-container > p {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1366) {
+  .intro-container {
+      width: 90%;
+  }
+}
+@media (max-width: 1024px) {
+  .intro-container {
+      width: 100%;
+  }
+}
+@media (max-width: 786px) {
+  .intro-container {
+    margin-bottom: 1rem;
+  }
+}
+
+/* === FORMULAR === */
+
+input[type="file"]{
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 0.1px;
+    height: 0.1px;
+}
+input[type="file"]:focus + label[for="file"]{
+    border: 1px solid #85E5FF;
+}
+label[for="file"]{
+    background: #FF7B47;
+    padding: 10px;
+    color: #fff;
+    font-family: sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+label[for="file"]:hover{
+    background: #FF9E59;
+}
+
+
+/* === GRID-SYSTHEM ===  */
+.container {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+[class*='col-'] {
+  float: left;
+  min-height: 1px;
+  min-width: 1px;
+  padding: .8rem;
+}
+
+.col-1 { width: 16.666%;  }
+.col-2 { width: 33.333%;  }
+.col-3 { width: 50%;      }
+.col-4 { width: 66.666%;  }
+.col-6 { width: 100%;     }
+
+/* 1024 px */
+@media (max-width: 1024px) {
+  .col-1 {
+    width: 33.333%;
+  }
+  [class*='col-'] {
+    font-size: 1.19rem;
+  }
+}
+/* 768 px */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .col-1 { width: 50%;  }
+  .col-2 { width: 100%; }
+  .col-3 { width: 100%; }
+  .col-4 { width: 100%; }
+
+}
+@media (max-width: 480px) {
+  [class*='col-'] {
+    font-size: 1.24rem;
+  }
+  .col-1 { width: 100%;  }
+
+}
