@@ -14,7 +14,7 @@ class AdminClass
 	public function __construct($user)
 	{
 		$this->settings=file("../.htdatabase/.htsettings.txt");
-		$this->url = str_replace("\n", "", $this->settings[0]);
+		$this->url = "../../..".str_replace("\n", "", $this->settings[0]);
         $this->userclass = $user;
 	}
 

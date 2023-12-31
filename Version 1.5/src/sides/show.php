@@ -1,5 +1,6 @@
-<?php 
-
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include "../../class/.htUserClass.php";
 include "../../class/.htAdminClass.php";
 
@@ -26,7 +27,7 @@ else {
 </head>
 <?php 
 
-$admin=new AdminClass();
+$admin=new AdminClass($user);
 $pfad=$_GET['file'];
 
 if (isset($pfad)) {

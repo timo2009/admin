@@ -46,7 +46,7 @@
 
 <?php 
 
-$admin=new AdminClass();
+$admin=new AdminClass($user);
 $data=$_POST['submit'];
 
 if (isset($data)) {
