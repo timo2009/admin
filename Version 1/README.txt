@@ -1,8 +1,6 @@
-This is the Admin by Timo Streich
-
-In each Version a readme file explains, how to use this version
-
-All rights reserve
+# admin
+PHP Admin controll for a html folder
+Here you can found the Versions from the admin
 
 From version 1.2 onwards, download the latest version, open it on the server where it is to run and log in with the following data:
 
