@@ -205,6 +205,10 @@ class UserClass
         $file="../.htdatabase/.htlog.txt";
         return file($file);
     }
+    public function clearAction() {
+        $file="../.htdatabase/.htlog.txt";
+        file_put_contents($file, "");
+    }
 
 	public function findAllUsers()
 	{

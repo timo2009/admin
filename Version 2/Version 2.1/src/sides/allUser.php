@@ -8,6 +8,20 @@ $user=new UserClass();
 $usersJson=json_encode($user->findAllUsers());
 $logs = json_encode(array_reverse($user->getAction()));
 
+if($_POST['clearCache'] == "true") {
+    $user->clearAction();
+    ?>
+
+    <div class="alert alert-success">
+        <b>Cache erfolgreich geleert!</b> Der Cache wurde erfolgreich zurückgesetzt!
+        <br>
+        <a href="allUser.php">zurück</a>
+    </div>
+
+        <?php
+    exit;
+}
+
 ?>
 
 
@@ -51,7 +65,10 @@ $logs = json_encode(array_reverse($user->getAction()));
             </ul>
         </div>
 
-
+        <form method="post" action="allUser.php" onsubmit="return doubleConfirm()">
+            <input type="hidden" name="clearCache" value="true">
+            <button type="submit" class="btn btn-danger">leeren</button>
+        </form>
         <table class="table">
             <thead>
             <tr>
@@ -74,12 +91,20 @@ $logs = json_encode(array_reverse($user->getAction()));
 	 
 	 </div>
 	<script>
+        function doubleConfirm() {
+            // Erste Bestätigung
+            return confirm("Bist du sicher, dass du den Cache leeren möchtest?");
+             // Abbrechen, wenn die erste Bestätigung abgelehnt wird
+        }
 	    var app = new Vue({
 	        el: '#app',
 	        data: {
 	            users: <? echo $usersJson;?>,
                 logs: <? echo $logs;?>,
 	        },
+            method: {
+
+            }
 	 
 	    })
 	</script>

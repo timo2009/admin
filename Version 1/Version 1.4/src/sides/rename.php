@@ -6,7 +6,7 @@ $newFilename=$_POST['new'];
 if ($oldFilename!="" && $newFilename!="") {
 	$nF=explode("/", $oldFilename);
 	array_pop($nF);
-	$nF= implode('/', $nF) . "rename.php/" .$newFilename;
+	$nF= implode('/', $nF) . "/" .$newFilename;
 	$rename=$admin->renameFile($oldFilename, $nF);
 	if (!$rename) {
 		?>
