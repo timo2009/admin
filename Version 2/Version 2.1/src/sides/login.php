@@ -95,7 +95,7 @@
 
                 $user->_setUsernameAndPasswort($username, $passwort);
                 $login = $user->login();
-                if ($user->rightsNumber == 0) {
+                if ($user->rightsNumber == "0") {
                     $setCookieValue = $user->addCookie($username);
                     echo "<script>\nsetCookie('login', '";
                     echo $setCookieValue;

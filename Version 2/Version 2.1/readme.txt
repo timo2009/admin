@@ -14,5 +14,5 @@ New Functions:
 User language:
 German
 
-!!! This Version is finish !!!
+!!! This Version is not finish !!!
 

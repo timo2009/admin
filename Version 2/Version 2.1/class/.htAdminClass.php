@@ -36,9 +36,9 @@ class AdminClass
 
 
                 if ($type_info[0] == "audio") {
-                    $pfad = $this->url . "Audio/" . $fileName;
+                    $pfad = $this->url . "audio/" . $fileName;
                 } elseif ($type_info[0] == "image") {
-                    $pfad = $this->url . "img/" . $fileName;
+                    $pfad = $this->url . "image/" . $fileName;
                 } elseif ($type_info[0] == "video") {
                     $pfad = $this->url . "video/" . $fileName;
                 } elseif ($type_info[0] == "text") {
@@ -105,10 +105,10 @@ class AdminClass
 
         if ($type!="all") {
             if ($type=="audio") {
-                $verzeichnis=$this->url."Audio/";
+                $verzeichnis=$this->url."audio/";
             }
             elseif ($type=="image") {
-                $verzeichnis=$this->url."img/";
+                $verzeichnis=$this->url."image/";
             }
             elseif ($type=="video") {
                 $verzeichnis=$this->url."video/";
@@ -121,8 +121,8 @@ class AdminClass
         }
         else {
             $files=$this->listFilesFromFolder($this->url, $type, $files, true);
-            $files=$this->listFilesFromFolder($this->url."Audio/", $type, $files, true);
-            $files=$this->listFilesFromFolder($this->url."img/", $type, $files, true);
+            $files=$this->listFilesFromFolder($this->url."audio/", $type, $files, true);
+            $files=$this->listFilesFromFolder($this->url."image/", $type, $files, true);
             $files=$this->listFilesFromFolder($this->url."video/", $type, $files, true);
         }
         return $files;

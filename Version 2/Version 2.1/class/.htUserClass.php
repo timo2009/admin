@@ -59,7 +59,7 @@ class UserClass
 				{
 					// set the login variable true and return true
 					$this->login=true;
-					$this->rightsNumber=$user_info[2];
+					$this->rightsNumber=str_replace("\n", "", $user_info[2]);
 					return true;
 				}
 			}
@@ -166,8 +166,8 @@ class UserClass
 	{
 		if (!empty($username) && !empty($passwort)) {
 			unlink($this->filename);
-//            $hashedPassword = password_hash($passwort, PASSWORD_DEFAULT);
-//            file_put_contents($this->filename, $username.";".$hashedPassword.";1"."\n");
+            $hashedPassword = password_hash($passwort, PASSWORD_DEFAULT);
+            file_put_contents($this->filename, $username.";".$hashedPassword.";1"."\n");
 			return true;
 		}
 		else {
