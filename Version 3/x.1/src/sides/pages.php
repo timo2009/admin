@@ -77,17 +77,21 @@ if ($user->checkUserRights("read")): ?>
                 <div class="list-group mb-3">
                     <div class="list-group-item list-group-item-action text-xl">
                         <a href="javascript:void(0)" class="">Gruppen</a>
+                        <?php if ($user->checkUserRights("load")): ?>
                         <a href="addGroup.php" class="btn btn-success btn-sm">+ Hinzufügen</a>
+                        <?php endif; ?>
                     </div>
                     <?php foreach ($groups as $group): ?>
                         <a href="?type=<?php echo $group; ?>"
                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <?php echo $admin->returnActiveIfTypeAreGet($group, $_GET['type']); ?>">
                             <span><?php echo ucfirst($group); ?></span>
+                            <?php if ($user->checkUserRights("delete") && $group !== "main"): ?>
                             <button
                                     class="btn btn-sm btn-outline-danger"
                                     @click.prevent="openDeleteWindow('unset.php?group=<?php echo $group; ?>', '<?php echo $group; ?>')"
                             >🗑️
                             </button>
+                            <?php endif; ?>
                         </a>
                     <?php endforeach; ?>
 
@@ -126,11 +130,13 @@ if ($user->checkUserRights("read")): ?>
                                     <div>
                                         <a :href="file.pfad" class="btn btn-sm btn-outline-primary">👁️</a>
                                         <a :href="file.renameLink" class="btn btn-sm btn-outline-secondary">✏️</a>
+                                        <?php if ($user->checkUserRights("delete")): ?>
                                         <a
                                                 :href="file.deleteLink"
                                                 class="btn btn-sm btn-outline-danger"
                                                 @click.prevent="openDeleteWindow(file.deleteLink)"
                                         >🗑️</a>
+                                        <?php endif; ?>
                                     </div>
                                 </li>
                             </ul>

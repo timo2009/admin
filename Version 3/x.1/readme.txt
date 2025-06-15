@@ -1,18 +1,16 @@
 Admin is created by Timo Streich!
 ________________________________________________________________________
 
-Version 2.1
+Version 3.1
 
 New Functions:
-- more than one File can loaded up
-- Reset User Password
-- Password is saved with Hash Funktion
-- New Log and List View
-- Bugfixing
+- cloud and file manager seperated
+- file access links
+- possibility to manage a hole ecosystem
 
 
 User language:
 German
 
-!!! This Version is not finish !!!
+!!! This Version is finish !!!
 

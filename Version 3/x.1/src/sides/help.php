@@ -54,9 +54,9 @@
             <!-- 2 -->
             <div class="col-3">
                 <article class="leistungs-teaser-box">
-                    <h2>Der Überblick</h2>
+                    <h2>Die Pages</h2>
                     <p>
-                        Die Seite „Dateien“ bietet eine Übersicht aller hochgeladenen Dateien. Es gibt Kategorien wie Video oder Text. Über ein Auswahlmodul lässt sich der Dateityp filtern. Angezeigt werden Dateiname und Pfad – z. B. für Verlinkungen.
+                        Die Seite Pages ist in Gruppen/Ordner/Projekte unterteilt, diese haben jeweils Dateien, die erstellt, gelöscht und bearbeitet werden können, wie die Projekte selbst.
                     </p>
                 </article>
             </div>
@@ -66,7 +66,7 @@
                 <article class="leistungs-teaser-box">
                     <h2>Einzelansicht</h2>
                     <p>
-                        Beim Klick auf den Pfad in der Tabelle erscheint eine Vorschau. Audio- und Videodateien werden direkt abgespielt. Ein blaues Infofeld oben enthält Links zum Herunterladen und weitere Details.
+                        Beim Klick auf eine Datei erscheint eine Vorschau. Audio- und Videodateien werden direkt abgespielt. Ein blaues Infofeld oben enthält Links zum Herunterladen und weitere Details.
                     </p>
                 </article>
             </div>
@@ -76,7 +76,7 @@
                 <article class="leistungs-teaser-box">
                     <h2>Das Löschen</h2>
                     <p>
-                        In der Tabelle einfach auf das Mülleimer-Symbol klicken und das Löschen bestätigen.
+                        Bei der Datei einfach auf das Mülleimer-Symbol klicken und das Löschen bestätigen.
                         <strong>Achtung:</strong> Gelöschte Dateien können nicht wiederhergestellt werden!
                     </p>
                 </article>
@@ -87,7 +87,7 @@
                 <article class="leistungs-teaser-box">
                     <h2>Textdateien bearbeiten</h2>
                     <p>
-                        Klicke in der Tabelle auf den Pfad und auf der Detailseite auf „Bearbeiten“. Änderungen speichern mit „Ändern“.
+                        Klicke bei der Datei auf den Pfad oder das Auge und auf der Detailseite auf „Bearbeiten“. Änderungen speichern mit „Ändern“.
                     </p>
                 </article>
             </div>
@@ -97,7 +97,7 @@
                 <article class="leistungs-teaser-box">
                     <h2>Neue Textdatei erstellen</h2>
                     <p>
-                        Klicke auf das Plus-Symbol in der Tabelle, gib den Dateinamen (ohne Endung) ein und wähle den gewünschten Dateityp.
+                        Klicke auf das Plus-Symbol bei der Datei, gib den Dateinamen (ohne Endung außer bei Custom) ein und wähle den gewünschten Dateityp.
                     </p>
                 </article>
             </div>
@@ -107,7 +107,7 @@
                 <article class="leistungs-teaser-box">
                     <h2>Datei umbenennen</h2>
                     <p>
-                        In der Tabelle auf das Stift-Symbol klicken, neuen Namen eingeben und „Umbenennen“ auswählen.
+                        Bei der Datei auf das Stift-Symbol klicken, neuen Namen eingeben und „Umbenennen“ auswählen.
                     </p>
                 </article>
             </div>

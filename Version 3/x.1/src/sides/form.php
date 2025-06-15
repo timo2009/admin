@@ -127,7 +127,7 @@
                                 type="submit"
                                 class="btn btn-primary"
                                 name="submit"
-                                value="Upload"
+                                value="Upload to cloud"
                         />
                     </form>
 

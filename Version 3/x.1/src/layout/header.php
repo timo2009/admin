@@ -36,7 +36,15 @@ else {
 	<link rel="stylesheet" type="text/css" href="../systhem/styles.css">
 	<!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<title>MAI von <?php echo $_SERVER["SERVER_NAME"]; ?></title>
+    <!-- CodeMirror 6 via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@6/theme/material-darker.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@codemirror/basic-setup@0.19.2/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@codemirror/view@0.19.45/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@codemirror/state@0.19.15/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@codemirror/lang-html@0.19.8/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@codemirror/commands@0.19.9/dist/index.min.js"></script>
+
+    <title>MAI von <?php echo $_SERVER["SERVER_NAME"]; ?></title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
