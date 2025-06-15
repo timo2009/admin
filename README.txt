@@ -15,3 +15,5 @@ Password:
 #12-34important
 
 After the login you have to change your login Datas and you login again, then you can use the admin
+
+When you only wants to update, save your content of .htusers.txt in src/.htdatabase/ and replace with that the new content.
