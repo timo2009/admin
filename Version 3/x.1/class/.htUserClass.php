@@ -167,9 +167,10 @@ CSS;
 </body>
 </html>';
             file_put_contents("../../.." . $this->pages . "main/src/styles.css", $cssContent);
-            file_put_contents("../../.." . $this->pages . "main/index.php", $htmlContent);
+            //file_put_contents("../../.." . $this->pages . "main/index.php", $htmlContent);
             file_put_contents("../../../index.php", '<?php
-
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 $requestUri = $_SERVER["REQUEST_URI"];
 
 if ($requestUri == "/") {
@@ -178,8 +179,11 @@ if ($requestUri == "/") {
 }
 
 $baseFile = basename(__FILE__);
-$pathInfo = str_replace("/" . $baseFile, "", $requestUri);
-$path = ltrim($pathInfo, "/");
+$scriptName = $_SERVER["SCRIPT_NAME"]; // z.B. "/index.php"
+$path = substr($requestUri, strlen($scriptName)); // ergibt "/a/b"
+$path = ltrim($path, "/"); // ergibt "a/b"
+
+
 if ($path == "") {
     $path = "main/index.php";
 }
@@ -196,15 +200,10 @@ if (!file_exists($file)) {
 
 $mime = mime_content_type($file);
 
-if (pathinfo($file, PATHINFO_EXTENSION) === "php") {
-    ob_start();
+$array = explode(".", $file);
+if (end($array) === "php") {
     include $file;
-    $output = ob_get_clean();
-    header("Content-Type: text/html; charset=utf-8");
-    echo $output;
-    exit;
-}
-
+} else {
 $videoTypes = ["video/mp4", "video/webm", "video/ogg"];
 
 if (in_array($mime, $videoTypes)) {
@@ -217,7 +216,7 @@ if (in_array($mime, $videoTypes)) {
 
 header("Content-Type: $mime");
 echo file_get_contents($file);
-
+}
 ');
 
 
