@@ -1,0 +1,16 @@
+0;inizial
+1;superuser
+2;onlyread
+3;onlyload
+4;read-load
+5;load-delete-read
+6;read-user-load-delete
+---------------------------------------------------------------------
+inizial: inizialuser(add new User(Superuser))
+superuser: all rights
+read:read, download, rename, change
+load: load, add
+delete: delete
+user: add user, delete User, change User
+only: only
+a: and

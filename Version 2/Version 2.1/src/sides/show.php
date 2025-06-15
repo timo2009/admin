@@ -54,7 +54,7 @@ if (isset($pfad)) {
 	echo "<li>Size: ".$admin->formatSizeUnits($filesize)."</li>";	
 	echo '<li>Die Datei wurde zuletzt am '.date("d.m.Y",$timestamp).' um '.date("H:i",$timestamp).' geändert.</li>';
 	echo "</ol></div><hr></body>
-    </html>";
+    </f>";
 
     echo $html[0];
 

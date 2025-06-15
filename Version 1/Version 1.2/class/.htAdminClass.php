@@ -22,20 +22,20 @@ class AdminClass
 	    	$type_info = explode("/", $type);
 
 	    	if ($type_info[0]=="audio") {
-	    		$pfad="../../../html/medien/audio/".$fileName;
+	    		$pfad="../../../f/medien/audio/".$fileName;
 	    	}	    	
 	    	elseif ($type_info[0]=="image") {
-	    		$pfad="../../../html/medien/img/".$fileName;
+	    		$pfad="../../../f/medien/img/".$fileName;
 	    	}	    	
 	    	elseif ($type_info[0]=="video") {
-	    		$pfad="../../../html/medien/video/".$fileName;
+	    		$pfad="../../../f/medien/video/".$fileName;
 	    	}
 
 	    	elseif ($type_info[0]=="text") {
-	    		$pfad="../../../html/".$fileName;
+	    		$pfad="../../../f/".$fileName;
 	    	}		    	
 	    	elseif ($type_info[1]=="pdf") {
-	    		$pfad="../../../html/".$fileName;
+	    		$pfad="../../../f/".$fileName;
 	    	}	    	
     		else {
     			return $type;
@@ -54,7 +54,7 @@ class AdminClass
 		if ($handle = opendir($pfad)){
 			while (($file = readdir($handle)) !== false){
 				$extension = substr($file, strrpos($file, '.') + 1);
-				if (filetype( $file )=="dir" || $pfad.$file=="../../../html/medien" || $extension=="php") {
+				if (filetype( $file )=="dir" || $pfad.$file=="../../../f/medien" || $extension=="php") {
 				  continue;
 				}
 				if (!$all) {
@@ -87,25 +87,25 @@ class AdminClass
 
 		if ($type!="all") {
 	    	if ($type=="audio") {
-	    		$verzeichnis="../../../html/medien/audio/";
+	    		$verzeichnis="../../../f/medien/audio/";
 	    	}	    	
 	    	elseif ($type=="image") {
-	    		$verzeichnis="../../../html/medien/img/";
+	    		$verzeichnis="../../../f/medien/img/";
 	    	}	    	
 	    	elseif ($type=="video") {
-	    		$verzeichnis="../../../html/medien/video/";
+	    		$verzeichnis="../../../f/medien/video/";
 	    	}
 
 	    	else {
-	    		$verzeichnis="../../../html/";
+	    		$verzeichnis="../../../f/";
 	    	}
 	    	$files=$this->listFilesFromFolder($verzeichnis, $files);
 		}
 		else {
-	    	$files=$this->listFilesFromFolder("../../../html/", $files, true);
-	    	$files=$this->listFilesFromFolder("../../../html/medien/audio/", $files, true);
-	    	$files=$this->listFilesFromFolder("../../../html/medien/img/", $files, true);
-	    	$files=$this->listFilesFromFolder("../../../html/medien/video/", $files, true);
+	    	$files=$this->listFilesFromFolder("../../../f/", $files, true);
+	    	$files=$this->listFilesFromFolder("../../../f/medien/audio/", $files, true);
+	    	$files=$this->listFilesFromFolder("../../../f/medien/img/", $files, true);
+	    	$files=$this->listFilesFromFolder("../../../f/medien/video/", $files, true);
 		}
 		return $files;
 	}
@@ -136,24 +136,24 @@ class AdminClass
 		$text=false;
 
 		if ($type_info[0]=="audio") {
-	    	$html="<html>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</f>";
 	    	$back="list.php?type=audio";
 	    }	    	
 	    elseif ($type_info[0]=="image") {
-	    	$html="<html>\n<head>\n<title>Bild</title>\n<style>\nimg{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<img src='".$pfad."'>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Bild</title>\n<style>\nimg{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<img src='".$pfad."'>\n</body>\n</f>";
 	    	$back="list.php?type=image";
 	    }	    	
 	    elseif ($type_info[0]=="video") {
-	    	$html="<html>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</f>";
 	    	$back="list.php?type=video";
 	    }		    
 	    elseif ($type_info[1]=="plain") {
-	    	$html="<html>\n<head>\n<title>Text</title>\n</head>\n<body>\n<pre>".file_get_contents($pfad)."</pre>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Text</title>\n</head>\n<body>\n<pre>".file_get_contents($pfad)."</pre>\n</body>\n</f>";
 	    	$back="list.php?type=text";
 	    	$text=true;
 	    }	    
 	    elseif ($type_info[1]=="pdf") {
-	    	$html="<html>\n<head>\n<title>PDF</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<embed data=”NAME.pdf” type”application/pdf” src='".$pfad."'></embed>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>PDF</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<embed data=”NAME.pdf” type”application/pdf” src='".$pfad."'></embed>\n</body>\n</f>";
 	    	$back="list.php?type=text";
 	    }
 	    elseif ($type_info[0]=="text" || $type_info[1]=="x-empty") {
@@ -162,7 +162,7 @@ class AdminClass
 	    	$text=true;
 	    }
 	    else {
-	    	$html="<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n<b>Error: </b>File not found.\n</body>\n</html>";    
+	    	$html="<f>\n<head>\n<title>Error</title>\n</head>\n<body>\n<b>Error: </b>File not found.\n</body>\n</f>";
 	    }
 	    if ($all) {
 	    	return [$html, $path_parts['basename'], "list.php?type=all", $pfad, $text];
@@ -224,18 +224,18 @@ class AdminClass
 
 	public function addFile($name, $art)
 	{
-		$pfad="../../../html/".$name;
-		$htmlG="<!DOCTYPE html>\n<html>\n<head>\n<meta charset='utf-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1'>\n<title>HTML Datei</title>\n</head>\n<body>\n\n</body>\n</html>";
-		if ($art=="html-g") {
-			$pfad=$pfad.".html";
+		$pfad="../../../f/".$name;
+		$htmlG="<!DOCTYPE f>\n<f>\n<head>\n<meta charset='utf-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1'>\n<title>HTML Datei</title>\n</head>\n<body>\n\n</body>\n</f>";
+		if ($art=="f-g") {
+			$pfad=$pfad.".f";
 			if (file_exists($pfad)) {
 				return false;
 			}
 			file_put_contents($pfad, $htmlG);
 			return true;
 		}
-		elseif ($art=="html") {
-			$pfad=$pfad.".html";
+		elseif ($art=="f") {
+			$pfad=$pfad.".f";
 			if (file_exists($pfad)) {
 				return false;
 			}

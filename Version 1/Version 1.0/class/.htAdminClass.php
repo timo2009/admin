@@ -18,17 +18,17 @@ class AdminClass
 	    	$type_info = explode("/", $type);
 
 	    	if ($type_info[0]=="audio") {
-	    		$pfad="../html/medien/audio/".$fileName;
+	    		$pfad="../f/medien/audio/".$fileName;
 	    	}	    	
 	    	elseif ($type_info[0]=="image") {
-	    		$pfad="../html/medien/img/".$fileName;
+	    		$pfad="../f/medien/img/".$fileName;
 	    	}	    	
 	    	elseif ($type_info[0]=="video") {
-	    		$pfad="../html/medien/video/".$fileName;
+	    		$pfad="../f/medien/video/".$fileName;
 	    	}
 
 	    	elseif ($type_info[0]=="text") {
-	    		$pfad="../html/".$fileName;
+	    		$pfad="../f/".$fileName;
 	    	}
 	    	else {
 	    		return "Unknow Type";
@@ -52,22 +52,22 @@ class AdminClass
 
 
     	if ($type=="audio") {
-    		$verzeichnis="../html/medien/audio/";
+    		$verzeichnis="../f/medien/audio/";
     	}	    	
     	elseif ($type=="image") {
-    		$verzeichnis="../html/medien/img/";
+    		$verzeichnis="../f/medien/img/";
     	}	    	
     	elseif ($type=="video") {
-    		$verzeichnis="../html/medien/video/";
+    		$verzeichnis="../f/medien/video/";
     	}
 
     	else {
-    		$verzeichnis="../html/";
+    		$verzeichnis="../f/";
     	}
     	if ($handle = opendir($verzeichnis)){
 			while (($file = readdir($handle)) !== false){
 				$extension = substr($file, strrpos($file, '.') + 1);
-				if (filetype( $file )=="dir" || $file=="dowload.php" || $verzeichnis.$file=="../html/medien" || $extension=="php") {
+				if (filetype( $file )=="dir" || $file=="dowload.php" || $verzeichnis.$file=="../f/medien" || $extension=="php") {
 				  continue;
 				}
 
@@ -109,15 +109,15 @@ class AdminClass
 		$path_parts = pathinfo($pfad);
 
 		if ($type_info[0]=="audio") {
-	    	$html="<html>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</f>";
 	    	$back="list.php?type=audio";
 	    }	    	
 	    elseif ($type_info[0]=="image") {
-	    	$html="<html>\n<head>\n<title>Bild</title>\n<style>\nimg{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<img src='".$pfad."'>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Bild</title>\n<style>\nimg{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<img src='".$pfad."'>\n</body>\n</f>";
 	    	$back="list.php?type=image";
 	    }	    	
 	    elseif ($type_info[0]=="video") {
-	    	$html="<html>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</html>";
+	    	$html="<f>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</f>";
 	    	$back="list.php?type=video";
 	    }
 	    elseif ($type_info[0]=="text") {
@@ -125,7 +125,7 @@ class AdminClass
 	    	$back="list.php?type=text";
 	    }
 	    else {
-	    	$html="<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n<b>Error: </b>File not found.\n</body>\n</html>";    
+	    	$html="<f>\n<head>\n<title>Error</title>\n</head>\n<body>\n<b>Error: </b>File not found.\n</body>\n</f>";
 	    }
 	    return [$html, $path_parts['basename'], $back, $pfad];
 	}

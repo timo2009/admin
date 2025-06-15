@@ -176,24 +176,24 @@ class AdminClass
         $parts = explode(".", $pfad);
 
         if ($type_info[0]=="audio") {
-            $html="<html>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</html>";
+            $html="<f>\n<head>\n<title>Audio</title>\n</head>\n<body>\n<audio autoplay controls src='".$pfad."'></audio>\n</body>\n</f>";
             $back="list.php?type=audio";
         }
         elseif ($type_info[0]=="image") {
-            $html="<html>\n<head>\n<title>Bild</title>\n<style>\nimg{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<img src='".$pfad."'>\n</body>\n</html>";
+            $html="<f>\n<head>\n<title>Bild</title>\n<style>\nimg{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<img src='".$pfad."'>\n</body>\n</f>";
             $back="list.php?type=image";
         }
         elseif ($type_info[0]=="video") {
-            $html="<html>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</html>";
+            $html="<f>\n<head>\n<title>Video</title>\n<style>\nvideo{\nwidth: 100%;\nheight: auto;\n}\n</style>\n</head>\n<body>\n<video src='".$pfad."' autoplay preload=”none” controls></video>\n</body>\n</f>";
             $back="list.php?type=video";
         }
         elseif ($type_info[1]=="plain" || end($parts) == "php") {
-            $html="<html>\n<head>\n<title>Text</title>\n</head>\n<body>\n<pre>".htmlspecialchars(file_get_contents($pfad))."</pre>\n</body>\n</html>";
+            $html="<f>\n<head>\n<title>Text</title>\n</head>\n<body>\n<pre>".htmlspecialchars(file_get_contents($pfad))."</pre>\n</body>\n</f>";
             $back="list.php?type=text";
             $text=true;
         }
         elseif ($type_info[1]=="pdf") {
-            $html="<html>\n<head>\n<title>PDF</title>\n</head>\n<body>\n<object data='".$pfad."' style='width:100%;height:10000px'>\n</body>\n</html>";
+            $html="<f>\n<head>\n<title>PDF</title>\n</head>\n<body>\n<object data='".$pfad."' style='width:100%;height:10000px'>\n</body>\n</f>";
             $back="list.php?type=text";
         }
         elseif ($type_info[0]=="text" || $type_info[1]=="x-empty") {
@@ -202,7 +202,7 @@ class AdminClass
             $text=true;
         }
         else {
-            $html="<html>\n<head>\n<title>Die Datei kann nicht geladen werden</title>\n</head>\n<body>\n<b>\n Für diesen Typ von Datei gibt es keine Vorschau. \n</b>\n</body>\n</html>";
+            $html="<f>\n<head>\n<title>Die Datei kann nicht geladen werden</title>\n</head>\n<body>\n<b>\n Für diesen Typ von Datei gibt es keine Vorschau. \n</b>\n</body>\n</f>";
             $back="list.php?type=all";
             $text=true;
         }
@@ -269,24 +269,24 @@ class AdminClass
     {
         $this->userclass->safeAction("Add '".$name."' (".$art.")");
         $pfad=$this->url.$name;
-        $htmlG="<!DOCTYPE html>\n<html>\n<head>\n<meta charset='utf-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1'>\n<title>HTML Datei</title>\n</head>\n<body>\n\n</body>\n</html>";
-        if ($art=="html-g") {
-            $pfad=$pfad.".html";
+        $htmlG="<!DOCTYPE f>\n<f>\n<head>\n<meta charset='utf-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1'>\n<title>HTML Datei</title>\n</head>\n<body>\n\n</body>\n</f>";
+        if ($art=="f-g") {
+            $pfad=$pfad.".f";
             if (file_exists($pfad)) {
                 return false;
             }
             file_put_contents($pfad, $htmlG);
             return true;
         }
-        elseif ($art=="html") {
-            $pfad=$pfad.".html";
+        elseif ($art=="f") {
+            $pfad=$pfad.".f";
             if (file_exists($pfad)) {
                 return false;
             }
             file_put_contents($pfad, "");
             return true;
         }
-        elseif ($art=="txt") {
+        else {
             $pfad=$pfad.".txt";
             if (file_exists($pfad)) {
                 return false;
@@ -296,5 +296,3 @@ class AdminClass
         }
     }
 }
-
-?>
