@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <b>Type: </b> <?php echo $upload[2]; ?><br>
                 <b>Size: </b> <?php echo $upload[3] / 1024; ?>kb<br>
                 Stored in <?php echo $upload[4]; ?><hr>
-                <a href='list.php?type=<?php echo $type_info[0]; ?>'>ansehen</a>
+                <?php echo "<a href='list.php?type=" . $upload[6] . "'>ansehen</a>"; ?>
             </div>
 
         <?php } elseif ($upload) { ?>

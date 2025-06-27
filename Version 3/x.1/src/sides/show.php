@@ -44,7 +44,7 @@ if (!$cookie) {
         $filesize = filesize($html[3]);
         $isShared = $admin->isInShareMode($html[3]);
 
-        $back_link = $_GET["pages"] ? "pages.php?type=" . $_GET['type'] : $html[2];
+        $back_link = $_GET["pages"] ? "pages.php?type=" . $_GET['type'] : "list.php?type=" . $_GET['type'];
 
         echo "<div class='alert alert-info' role='alert'>
     <h1>Webseiten Informationen:</h1>

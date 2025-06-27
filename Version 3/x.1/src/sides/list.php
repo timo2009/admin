@@ -14,9 +14,9 @@ if ($_GET['type'] == "") {
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="?type=text" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("text", $_GET['type']); ?>"
+        <a href="?type=files" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("files", $_GET['type']); ?>"
            aria-current="page">
-            <span class="ms-2">Text</span>
+            <span class="ms-2">Dateien</span>
         </a>
         <a href="?type=audio" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("audio", $_GET['type']); ?>"
            aria-current="page">
@@ -30,13 +30,9 @@ if ($_GET['type'] == "") {
            aria-current="page">
             <span class="ms-2">Videos</span>
         </a>
-        <a href="?type=files" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("files", $_GET['type']); ?>"
-           aria-current="page">
-            <span class="ms-2">Dateien</span>
-        </a>
         <a href="?type=docs" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("docs", $_GET['type']); ?>"
            aria-current="page">
-            <span class="ms-2">Dokumente</span>
+            <span class="ms-2">Dokumente (PDF)</span>
         </a>
         <a href="?type=all" class="nav-link <?php echo $admin->returnActiveIfTypeAreGet("all", $_GET['type']); ?>"
            aria-current="page">

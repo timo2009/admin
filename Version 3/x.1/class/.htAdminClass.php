@@ -39,7 +39,8 @@ class AdminClass
                 "image" => "image/",
                 "video" => "video/",
                 "text" => "files/",
-                "pdf" => "docs/"
+                "scripts" => "files/",
+                "application" => "docs/"
             ];
 
             $extension = strtolower($type_info[0]);
@@ -54,7 +55,7 @@ class AdminClass
 
             if (move_uploaded_file($tmpName, $pfad)) {
                 $this->userclass->safeAction("Load '" . $fileName . "' up");
-                $uploadData[] = [$fileName, $tmpName, $type, $size, $userpfad, $type_info];
+                $uploadData[] = [$fileName, $tmpName, $type, $size, $userpfad, $type_info, rtrim($directoryMap[$extension], "/")];
             }
         }
 
@@ -76,8 +77,8 @@ class AdminClass
                     'name' => $file,
                     'pfad' => $relativePath,
                     'deleteLink' => "unset.php?file=" . $pfad . $file,
-                    'showLink' => "show.php?file=" . $pfad . $file . ($all ? "&all=ja" : ""),
-                    'renameLink' => "rename.php?name=" . $pfad . $file . "&&type=" . $type
+                    'showLink' => "show.php?file=" . $pfad . $file . ($all ? "&all=ja" : "") . "&type=" . $type,
+                    'renameLink' => "rename.php?name=" . $pfad . $file . "&type=" . $type
                 ];
 
                 $allFiles[] = $fileInfo;
@@ -96,18 +97,17 @@ class AdminClass
             "audio" => "audio/",
             "image" => "image/",
             "video" => "video/",
-            "text" => "files/",
-            "pdf" => "docs/"
+            "files" => "files/",
+            "docs" => "docs/"
         ];
 
         if ($type != "all") {
-            $subDir = $directoryMap[$type] ?? "";
-            $verzeichnis = $this->url . $subDir;
-            $files = $this->listFilesFromFolder($verzeichnis, $type, $files);
+            $path = $this->url . $type . "/";
+            $files = $this->listFilesFromFolder($path, $type, $files);
         } else {
             foreach ($directoryMap as $subDir) {
-                $verzeichnis = $this->url . $subDir;
-                $files = $this->listFilesFromFolder($verzeichnis, $type, $files, true);
+                $path = $this->url . $subDir;
+                $files = $this->listFilesFromFolder($path, $type, $files, true);
             }
         }
 
@@ -204,7 +204,7 @@ class AdminClass
                 break;
         }
 
-        $back = "list.php?type=" . ($all ? "all" : $mappedType);
+        $back = "list.php?type=" . ($all ? "all" : $mappedType) . "&type=" . $type;
         return [$html, basename($pfad), $back, $pfad, $text];
     }
 
@@ -279,37 +279,35 @@ class AdminClass
 
     public function addFile($name, $art, $type = false)
     {
-        $this->userclass->safeAction("Add '" . $name . "' (" . $art . ")");
-        $pfad = !$type ? $this->url . "files/" . $name : $this->pages . $type . "/" . $name;
+        $this->userclass->safeAction("Add '$name' ($art)");
+        $baseDir = $type ? $this->pages . $type : $this->url . "files";
+        $pfad = $baseDir . '/' . $name;
+        $extensionMap = [
+            "html-g" => ".html",
+            "html" => ".html",
+            "php" => ".php",
+            "custom" => "",
+            "default" => ".txt"
+        ];
 
-        $directory = dirname($pfad);
-        if (!is_dir($directory)) mkdir($directory, 0777, true);
+        $extension = $extensionMap[$art] ?? $extensionMap["default"];
+        $pfad .= $extension;
 
-        $template = "<!DOCTYPE html>\n<html lang='en'>\n<head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>HTML Datei</title></head><body>\n\n</body></html>";
+        if (file_exists($pfad)) return false;
 
-        switch ($art) {
-            case "html-g":
-                $pfad .= ".html";
-                if (file_exists($pfad)) return false;
-                file_put_contents($pfad, $template);
-                return true;
-
-            case "html":
-                $pfad .= ".html";
-                break;
-
-            case "php":
-                $pfad .= ".php";
-                return file_exists($pfad) ? false : (bool)file_put_contents($pfad, "<?php\n\n");
-
-            case "custom":
-                break;
-
-            default:
-                $pfad .= ".txt";
+        if (!is_dir(dirname($pfad))) {
+            mkdir(dirname($pfad), 0777, true);
         }
 
-        return file_exists($pfad) ? false : (bool)file_put_contents($pfad, "");
+        $contentMap = [
+            "html-g" => "<!DOCTYPE html>\n<html lang='en'>\n<head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>HTML Datei</title></head><body>\n\n</body></html>",
+            "php" => "<?php\n\n",
+            "default" => ""
+        ];
+
+        $content = $contentMap[$art] ?? $contentMap["default"];
+        file_put_contents($pfad, $content);
+        return true;
     }
 
     public function listPagesGroups()
