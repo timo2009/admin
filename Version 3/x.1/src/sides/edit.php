@@ -66,7 +66,7 @@ if ($user->checkUserRights("read")):?>
         $filename = basename($pfad);
         ?>
         <div id="editorContainer" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index:9999;">
-            <div id="editor" style="height: calc(100vh - 60px); width:100%;"></div>
+            <div id="editor" style="height: calc(100vh - 60px); width:100%;"><?php echo htmlspecialchars($currentContent); ?></div>
         </div>
 
         <!-- Toolbar unten -->
@@ -90,7 +90,6 @@ if ($user->checkUserRights("read")):?>
             editor.session.setMode("ace/mode/php");
             editor.setTheme("ace/theme/monokai");
             editor.setOptions({ fontSize: "14px", tabSize: 4, useSoftTabs: true });
-            editor.setValue(`<?php echo $currentContent; ?>`, -1);
 
             const saveBtn = document.getElementById("saveBtn");
             const saveMsg = document.getElementById("saveMsg");
