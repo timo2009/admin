@@ -17,10 +17,6 @@
             color: #2c3e50;
         }
 
-        #file {
-            display: none;
-        }
-
         #drop-area {
             border: 3px dashed #3498db;
             border-radius: 12px;
@@ -95,6 +91,13 @@
         input[type="submit"].btn-primary:hover {
             background-color: #1c5980;
             border-color: #1c5980;
+        }
+        #file {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+            width: 0;
+            height: 0;
         }
     </style>
 
@@ -191,12 +194,15 @@
     </section>
 
     <script>
+
         const form = document.getElementById('uploadForm');
         const progressBar = document.getElementById('progressBar');
         const status = document.getElementById('status');
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file');
-
+        fileInput.addEventListener("change", (e) => {
+            console.log('Datei ausgewählt:', e.target.files[0]);
+        });
         // Drag & Drop Visuals
         dropArea.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -209,20 +215,22 @@
         });
 
         dropArea.addEventListener('drop', (e) => {
+            console.log('event_drop');
+
             e.preventDefault();
             dropArea.classList.remove('dragover');
+            console.log('event_drop');
 
             if (e.dataTransfer.files.length) {
                 fileInput.files = e.dataTransfer.files;
-                // Optional: Update label text with filenames
-                status.textContent = e.dataTransfer.files.length + ' Datei(en) ausgewählt.';
+                updateFileList(fileInput.files);
             }
         });
 
-        // Klick auf Label öffnet Datei-Auswahl
-        dropArea.addEventListener('click', () => fileInput.click());
 
         form.addEventListener('submit', function (e) {
+            console.log("submit")
+            console.log(fileInput.files)
             e.preventDefault(); // Standard-Submit verhindern
 
             if (fileInput.files.length === 0) {
@@ -276,17 +284,13 @@
             status.textContent = files.length + ' Datei(en) ausgewählt.';
         }
 
-        dropArea.addEventListener('drop', (e) => {
+
+
+
+        fileInput.addEventListener('change', (e) => {
+            console.log("change")
             e.preventDefault();
-            dropArea.classList.remove('dragover');
-
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                updateFileList(fileInput.files);
-            }
-        });
-
-        fileInput.addEventListener('change', () => {
+            console.log("change")
             updateFileList(fileInput.files);
         });
 
