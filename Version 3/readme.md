@@ -76,8 +76,10 @@ sudo systemctl reload apache2
 
 1. Edit your `src/.htdatabase/.htsettings.txt` file — change the single line (e.g. `/html/`) to a two-line format, for example:  
 
-`/f/cloud/
-/f/pages/`
+```
+/f/cloud/
+/f/pages/
+```
 
    Inside the **cloud** directory, place your old `/html` files in the following subdirectories:
 - `audio/` (audio files)
