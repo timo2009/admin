@@ -15,7 +15,7 @@
 German
 
 ## Upgrade from 1:
-* !!! you need to delete also the users.txt file for password hash !!! 
+!!! you need to **delete** also the users.txt file for password hash !!! 
 
 # !!! This Version is not finish !!!
 
