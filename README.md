@@ -23,6 +23,10 @@ Each version includes a **README** file explaining how to use that version.
 
 **Important:** See the README included in Version 3.
 
+## Upgrading to Version 1 to 2
+
+**Important:** See the README included in Version 2.
+
 ## Upgrading normal (also from 3.1 to 3.2, ...)
 
 1. Save your `.htusers.txt` file from `src/.htdatabase/`.  
