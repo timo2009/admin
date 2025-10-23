@@ -92,7 +92,7 @@ sudo systemctl reload apache2
 2. Set permissions for the first path (`/f/cloud/`) and its subdirectories to **0700** — **not** for the second line (`/f/pages/`) or its subdirectories!
 3. Create the directory **/f/pages/main/** and copy your old root files there.
 4. Delete all files in the root **/** directory.
-5. Create a file named **index.php** and paste the code from `class/.htUserClass.php`, lines 171–219 (from `<?php` to the closing `}`).
+5. Create a file named **index.php** and paste the code from `Version 3/index.php`.
 6. Replace all **class** files with the new ones.
 7. Replace all **src/layout**, **src/sides**, and **src/system** files with the new versions.
 8. Create an empty file named `src/.htdatabase/.htshares.txt`.
