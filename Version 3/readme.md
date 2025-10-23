@@ -56,19 +56,18 @@
     CustomLog ${APACHE_LOG_DIR}/admin_access.log combined
 </VirtualHost>
 ```
-    Enable the site and reload Apache:
+Enable the site and reload Apache:
+
 ```
 sudo a2ensite admin.conf
 sudo systemctl reload apache2
 ```
 
-    Open your site in a browser (http://your-domain.com/) and log in using the default credentials.
+Open your site in a browser (http://your-domain.com/) and log in using the default credentials.
+Upload your saved files to /var/www/html/f/pages/main/.
+Update asset URLs if they were not imported as relative paths.
+Make sure the main index file is named index.php.
 
-    Upload your saved files to /var/www/html/f/pages/main/.
-
-        Update asset URLs if they were not imported as relative paths.
-
-        Make sure the main index file is named index.php.
 ---
 
 # Upgrade
