@@ -167,7 +167,7 @@ CSS;
 </body>
 </html>';
             file_put_contents("../../.." . $this->pages . "main/src/styles.css", $cssContent);
-            //file_put_contents("../../.." . $this->pages . "main/index.php", $htmlContent);
+            file_put_contents("../../.." . $this->pages . "main/index.php", $htmlContent);
             file_put_contents("../../../index.php", '<?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);

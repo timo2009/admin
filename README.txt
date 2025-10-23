@@ -16,4 +16,7 @@ Password:
 
 After the login you have to change your login Datas and you login again, then you can use the admin
 
-When you only wants to update, save your content of .htusers.txt in src/.htdatabase/ and replace with that the new content.
+Upgrade to Version 3:
+!!! see readme in Version 3 !!!
+
+When you want to upgrade (until 2.x), save your content of .htusers.txt in src/.htdatabase/ and replace the rest.
