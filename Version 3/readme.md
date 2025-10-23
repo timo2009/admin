@@ -93,9 +93,9 @@ sudo systemctl reload apache2
 3. Create the directory **/f/pages/main/** and copy your old root files there.
 4. Delete all files in the root **/** directory.
 5. Create a file named **index.php** and paste the code from `Version 3/index.php`. The
-```
-   error_reporting(E_ALL);
-   ini_set("display_errors", 1);
+```php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
    ```
 can you remove if you want...
 6. Replace all **class** files with the new ones.
