@@ -1,22 +1,29 @@
-This is the Admin by Timo Streich
+# The Admin by Timo Streich
 
-In each Version a readme file explains, how to use this version
+Each version includes a **README** file explaining how to use that version.  
 
-All rights reserve
+---
 
-From version 1.2 onwards, download the latest version, open it on the server where it is to run and log in with the following data:
+## Version 1.2 and Later
 
-Username:
+1. Download the latest version.  
+2. Open it on the server where it is to run.  
+3. Log in using the following credentials:
 
-inizialUser
+   - **Username:** `inizialUser`
+   - **Password:** `#12-34important`
 
-Password:
+4. After logging in, **change your login credentials**.  
+5. Log in again with your new credentials.  
+6. You can now use the admin panel.
 
-#12-34important
+---
 
-After the login you have to change your login Datas and you login again, then you can use the admin
+## Upgrading to Version 2 to 3
 
-Upgrade to Version 3:
-!!! see readme in Version 3 !!!
+**Important:** See the README included in Version 3.
 
-When you want to upgrade (until 2.x), save your content of .htusers.txt in src/.htdatabase/ and replace the rest.
+## Upgrading normal (also from 3.1 to 3.2, ...)
+
+1. Save your `.htusers.txt` file from `src/.htdatabase/`.  
+2. Replace the rest of the files with the new version.
