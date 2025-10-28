@@ -97,7 +97,7 @@ sudo systemctl reload apache2
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
    ```
-    can you remove if you want...
+can you remove if you want...
 6. Replace all **class** files with the new ones.
 7. Replace all **src/layout**, **src/sides**, and **src/system** files with the new versions.
 8. Create an empty file named `src/.htdatabase/.htshares.txt`.
