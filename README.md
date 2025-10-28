@@ -2,6 +2,8 @@
 
 Each version includes a **README** file explaining how to use that version.  
 
+# Note: We recommend placing all admin files in the /admin directory and serving them from the top-level route of your web server.
+
 ---
 
 ## Version 1.2 and Later
