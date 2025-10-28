@@ -8,8 +8,8 @@
 
 ### Process
 1. Go to the directory in your webspace that is linked to the **/** route.
-2. Upload the downloaded version to this directory.
-3. Open the **/** route in your browser and log in using the default credentials.
+3. Upload the downloaded version to this directory in a folder called admin.
+4. Open the **/admin** route in your browser and log in using the default credentials.
 4. We will set up everything for you.
 
 ---
@@ -23,8 +23,8 @@
 ### Process
 1. Go to the directory in your webspace that is linked to the **/** route.
 2. Back up all existing files on your system, then delete them from the webspace.
-3. Upload the downloaded version to this directory.
-4. Open the **/** route in your browser and log in using the default credentials.
+3. Upload the downloaded version to this directory in a folder called admin.
+4. Open the **/admin** route in your browser and log in using the default credentials.
 5. We will set up everything for you.
 6. Upload your saved files to **/f/pages/main/** (you might need to update asset URLs if they were not imported as relative paths; make sure the index file is named **index.php**).
 
@@ -39,7 +39,7 @@
 ### Process
 1. Go to your Apache **document root**, e.g., `/var/www/html`.
 2. Back up any existing files in the directory, then delete them.
-3. Upload the downloaded admin panel version to this directory.
+3. Upload the downloaded admin panel version to this directory in a folder called admin.
 4. Create or edit an Apache site configuration in `/etc/apache2/sites-available/`, e.g., `admin.conf`:
 
 ```apache
@@ -63,7 +63,7 @@ sudo a2ensite admin.conf
 sudo systemctl reload apache2
 ```
 
-- Open your site in a browser (http://your-domain.com/) and log in using the default credentials.
+- Open your site in a browser (http://your-domain.com/admin) and log in using the default credentials.
 - Upload your saved files to /var/www/html/f/pages/main/.
 - Update asset URLs if they were not imported as relative paths.
 - Make sure the main index file is named index.php.
