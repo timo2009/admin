@@ -57,16 +57,37 @@ function buildTree($structure, $path = '')
 
 $structureTree = buildTree($structure);
 
-/*
- * <?php
-// Alle GET-Parameter der aktuellen URL wieder zusammensetzen
-$queryString = http_build_query($_GET);
+$message = null;
 
-// Ziel-Link mit übergebenen Parametern
-$link = "zielseite.php?" . $queryString;
-?>
-<a href="<?= $link ?>">Link mit allen GET-Parametern</a>
- */
+if ($_POST['action']) {
+    $action = $_POST['action'];
+    if ($action == "addFolder") {
+        $name = $_POST['name'];
+        $group = $_POST['group'];
+        if ($admin->createFolderInGroup($group, $name)) {
+            $message = "Ordner " . $name . " wurde erstellt.";
+        } else {
+            $message = "Ordner " . $name . " wurde nicht erstellt.";
+        }
+    } else if ($action == "rmFolder") {
+        $name = $_POST['name'];
+        $group = $_POST['group'];
+        if ($admin->deleteFolderInGroup($group, $name)) {
+            $message = "Ordner " . $name . " wurde entfernt.";
+        } else {
+            $message = "Ordner " . $name . " wurde nicht entfernt, prüfe, ob er leer ist.";
+        }
+    }
+}
+
+if ($message !== null) {
+    $_SESSION['message'] = $message;
+    echo '<script>
+        setTimeout(() => {
+            window.location.href = ' . json_encode($_SERVER['REQUEST_URI']) . ';
+        }, 1000);
+    </script>';
+}
 
 if ($user->checkUserRights("read")): ?>
 
@@ -78,7 +99,7 @@ if ($user->checkUserRights("read")): ?>
                     <div class="list-group-item list-group-item-action text-xl">
                         <a href="javascript:void(0)" class="">Gruppen</a>
                         <?php if ($user->checkUserRights("load")): ?>
-                        <a href="addGroup.php" class="btn btn-success btn-sm">+ Hinzufügen</a>
+                            <a href="addGroup.php" class="btn btn-success btn-sm">+ Hinzufügen</a>
                         <?php endif; ?>
                     </div>
                     <?php foreach ($groups as $group): ?>
@@ -86,11 +107,11 @@ if ($user->checkUserRights("read")): ?>
                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <?php echo $admin->returnActiveIfTypeAreGet($group, $_GET['type']); ?>">
                             <span><?php echo ucfirst($group); ?></span>
                             <?php if ($user->checkUserRights("delete") && $group !== "main"): ?>
-                            <button
-                                    class="btn btn-sm btn-outline-danger"
-                                    @click.prevent="openDeleteWindow('unset.php?group=<?php echo $group; ?>', '<?php echo $group; ?>')"
-                            >🗑️
-                            </button>
+                                <button
+                                        class="btn btn-sm btn-outline-danger"
+                                        @click.prevent="openDeleteWindow('unset.php?group=<?php echo $group; ?>', '<?php echo $group; ?>')"
+                                >rm
+                                </button>
                             <?php endif; ?>
                         </a>
                     <?php endforeach; ?>
@@ -99,52 +120,101 @@ if ($user->checkUserRights("read")): ?>
             </div>
 
             <!-- Hauptbereich -->
+
+            <!-- Hauptbereich -->
             <div class="col-md-10">
-                <div class="row">
+                <div class="row g-4">
+
                     <!-- Ordnerstruktur -->
-                    <div class="col-md-5 border-end pe-4">
+                    <div class="col-12 col-lg-5 border-end-lg pe-lg-4">
                         <h4 class="mb-3">Struktur</h4>
+
+                        <?php if ($message !== null): ?>
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
+                                <button type="button" class="btn-close"
+                                        data-bs-dismiss="alert" aria-label="Schließen"></button>
+                            </div>
+                        <?php endif; ?>
+
                         <ul class="list-unstyled">
-                            <structure-item v-for="item in tree" :key="item.full" :item="item"></structure-item>
+                            <structure-item
+                                    v-for="item in tree"
+                                    :key="item.full"
+                                    :item="item">
+                            </structure-item>
                         </ul>
+
+                        <!-- Ordner erstellen -->
+                        <form method="post" class="mt-3">
+                            <input type="hidden" name="action" value="addFolder">
+                            <input type="hidden" name="group"
+                                   value="<?= htmlspecialchars($chooseGroup ?? '', ENT_QUOTES, 'UTF-8') ?>">
+
+                            <input type="text" name="name"
+                                   class="form-control mb-2"
+                                   placeholder="foldername/foldername/"
+                                   required>
+
+                            <button type="submit" class="btn btn-primary">
+                                Ordner erstellen
+                            </button>
+                        </form>
                     </div>
 
                     <!-- Dateien -->
-                    <div class="col-md-7 ps-4">
+                    <div class="col-12 col-lg-7">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4>Dateien</h4>
-                            <a v-if="'<?php echo $chooseGroup ?>'"
-                               :href="'add.php?pages=true&type=<?php echo $chooseGroup; ?>'"
-                               class="btn btn-success btn-sm">+ Hinzufügen</a>
+
+                            <?php if ($chooseGroup): ?>
+                                <a href="add.php?pages=true&amp;type=<?= urlencode($chooseGroup) ?>"
+                                   class="btn btn-success btn-sm">
+                                    + Hinzufügen
+                                </a>
+                            <?php endif; ?>
                         </div>
 
-                        <input class="form-control mb-3" v-model="search.name" placeholder="Nach Dateiname filtern...">
+                        <input
+                                class="form-control mb-3"
+                                v-model="search.name"
+                                placeholder="Nach Dateiname filtern..."
+                        >
 
                         <div v-if="filterByValue.length > 0">
                             <ul class="list-group">
-                                <li v-for="file in filterByValue" :key="file.name"
-                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        File: {{ file.name }}
-                                    </div>
-                                    <div>
-                                        <a :href="file.pfad" class="btn btn-sm btn-outline-primary">view</a>
-                                        <a :href="file.renameLink" class="btn btn-sm btn-outline-secondary">edit</a>
+                                <li
+                                        v-for="file in filterByValue"
+                                        :key="file.name"
+                                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap gap-2"
+                                >
+                                    <div>File: {{ file.name }}</div>
+
+                                    <div class="d-flex gap-1 flex-wrap">
+                                        <a :href="file.pfad"
+                                           class="btn btn-sm btn-outline-primary">view</a>
+
+                                        <a :href="file.renameLink"
+                                           class="btn btn-sm btn-outline-secondary">rename</a>
+
                                         <?php if ($user->checkUserRights("delete")): ?>
-                                        <a
-                                                :href="file.deleteLink"
-                                                class="btn btn-sm btn-outline-danger"
-                                                @click.prevent="openDeleteWindow(file.deleteLink)"
-                                        >löschen</a>
+                                            <a
+                                                    :href="file.deleteLink"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    @click.prevent="openDeleteWindow(file.deleteLink)"
+                                            >löschen</a>
                                         <?php endif; ?>
                                     </div>
                                 </li>
                             </ul>
                         </div>
+
                         <p v-else class="text-muted">Keine Dateien gefunden.</p>
                     </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -168,26 +238,85 @@ if ($user->checkUserRights("read")): ?>
                 }
             },
             template: `
-                <li>
-                  <div class="d-flex align-items-center mb-1">
-                    <span v-if="item.type === 'folder' || item.type === 'folder-empty'" @click="open = !open" style="cursor: pointer;">
-                      <strong>{{ open ? '📂' : '📁' }}</strong> {{ item.name }}
-                    </span>
-                    <span v-else>File {{ item.name }}</span>
-                    <div class="ms-auto" v-if="item.type === 'folder-empty'">
-                      <a :href="item.renameLink" class="btn btn-sm btn-outline-secondary btn-xs">✏️</a>
-                      <a
-                        :href="item.deleteLink"
-                        class="btn btn-sm btn-outline-danger btn-xs ms-1"
-                        @click.prevent="openDeleteWindow(item.deleteLink)"
-                      >delete</a>
-                    </div>
-                  </div>
-                  <ul v-if="item.children && open" class="ms-3 list-unstyled">
-                    <structure-item v-for="child in item.children" :key="child.full" :item="child"></structure-item>
-                  </ul>
-                </li>
-            `
+    <li>
+        <div class="d-flex align-items-center gap-2 mb-2">
+
+            <!-- Ordnername -->
+            <span
+                v-if="item.type === 'folder' || item.type === 'folder-empty'"
+                @click="open = !open"
+                class="d-flex align-items-center"
+                style="cursor: pointer; min-width: 0;"
+            >
+                <strong class="me-2">{{ open ? '📂' : '📁' }}</strong>
+                <span>{{ item.name }}</span>
+            </span>
+
+            <!-- Datei -->
+            <span v-else>
+                📄 {{ item.name }}
+            </span>
+
+            <!-- Aktionen rechts -->
+            <div
+                v-if="item.type === 'folder-empty'"
+                class="ms-auto d-flex align-items-center gap-1 flex-shrink-0"
+            >
+                <a
+                    :href="item.renameLink"
+                    class="btn btn-sm btn-outline-secondary"
+                >
+                    rename
+                </a>
+
+                <a
+                    :href="item.deleteLink"
+                    class="btn btn-sm btn-outline-danger"
+                    @click.prevent="openDeleteWindow(item.deleteLink)"
+                >
+                    delete
+                </a>
+            </div>
+
+            <!-- Leeren Ordner entfernen -->
+            <form
+                v-if="item.type === 'folder' || item.type === 'folder-empty'"
+                method="post"
+                class="ms-auto d-flex align-items-center flex-shrink-0"
+                @click.stop
+            >
+                <input type="hidden" name="action" value="rmFolder">
+                <input
+                    type="hidden"
+                    name="group"
+                    value="<?php echo htmlspecialchars($chooseGroup ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                >
+                <input type="hidden" name="name" :value="item.full">
+
+                <button
+                    type="submit"
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="return confirm('Diesen Ordner entfernen, sofern er leer ist?')"
+                >
+                    Ordner entfernen
+                </button>
+            </form>
+
+        </div>
+
+        <!-- Unterordner -->
+        <ul
+            v-if="item.children && item.children.length && open"
+            class="ms-4 list-unstyled"
+        >
+            <structure-item
+                v-for="child in item.children"
+                :key="child.full"
+                :item="child"
+            ></structure-item>
+        </ul>
+    </li>
+`
         });
 
         new Vue({

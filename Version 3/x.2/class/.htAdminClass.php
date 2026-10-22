@@ -317,36 +317,100 @@ class AdminClass
         });
     }
 
+    public function createFolderInGroup($group, $name)
+    {
+        $group = strtolower($group);
+        if (str_contains("..", $name)) {
+            return false;
+        }
+        $path = $this->pages . $group . DIRECTORY_SEPARATOR . $name;
+        return mkdir($path, 0777, true);
+    }
+
+    public function deleteFolderInGroup($group, $name)
+    {
+        $group = strtolower($group);
+
+        $baseDir = $this->pages . $group . DIRECTORY_SEPARATOR;
+        $path = $baseDir . str_replace(
+                '/',
+                DIRECTORY_SEPARATOR,
+                $name
+            );
+
+        // Nur existierende Verzeichnisse erlauben
+        if (!is_dir($path)) {
+            return false;
+        }
+
+        // Verhindern, dass der Gruppen-Hauptordner gelöscht wird
+        $realBase = realpath($baseDir);
+        $realPath = realpath($path);
+
+        if ($realBase === false || $realPath === false) {
+            return false;
+        }
+
+        // Nur Ordner innerhalb der gewählten Gruppe erlauben
+        if (
+            strpos($realPath, $realBase . DIRECTORY_SEPARATOR) !== 0
+        ) {
+            return false;
+        }
+
+        // rmdir löscht nur leere Ordner
+        return rmdir($realPath);
+    }
+
+
     public function groupStructure($group)
     {
         $baseDir = $this->pages . $group . '/';
-        if (!is_dir($baseDir)) return [];
+
+        if (!is_dir($baseDir)) {
+            return [];
+        }
 
         $structure = [];
+
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($baseDir, RecursiveDirectoryIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::LEAVES_ONLY
+            new RecursiveDirectoryIterator(
+                $baseDir,
+                RecursiveDirectoryIterator::SKIP_DOTS
+            ),
+            RecursiveIteratorIterator::SELF_FIRST
         );
 
         foreach ($iterator as $fileInfo) {
-            if (!$fileInfo->isFile()) continue;
+            $relativePath = str_replace(
+                '\\',
+                '/',
+                substr($fileInfo->getPathname(), strlen($baseDir))
+            );
 
-            $relativePath = str_replace('\\', '/', substr($fileInfo->getPathname(), strlen($baseDir)));
-            $parts = explode('/', $relativePath);
+            $parts = explode('/', trim($relativePath, '/'));
             $current = &$structure;
 
-            foreach ($parts as $part) {
-                if ($part === end($parts)) {
+            foreach ($parts as $index => $part) {
+                $isLast = ($index === count($parts) - 1);
+
+                if ($isLast && $fileInfo->isFile()) {
                     $current[] = $part;
                 } else {
-                    if (!isset($current[$part])) $current[$part] = [];
+                    if (!isset($current[$part]) || !is_array($current[$part])) {
+                        $current[$part] = [];
+                    }
+
                     $current = &$current[$part];
                 }
             }
+
+            unset($current);
         }
 
         return $structure;
     }
+
 
     public function listFilesInGroups($group)
     {
